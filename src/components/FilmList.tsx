@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect} from "react";
 import styles from '../styles/catalog.module.css';
 import logo from  "../assets/kinopoisk_logo.png";
+// import { useSearchParams } from "react-router";
 
 export function FilmList() {
 
@@ -81,7 +82,6 @@ export function FilmList() {
 
   return (
     <>
-    <h1 className={styles.catalogTitle}>Каталог фильмов</h1>
     <div className={styles.films}>
     {films.map((film, index) => (
       <div className={styles.film} key={index} >
