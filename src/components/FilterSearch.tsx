@@ -1,5 +1,7 @@
 import styles from '../styles/app.module.css';
 import { useState } from 'react';
+import favoriteIcon from '../assets/favorite-svgrepo-com.svg';
+import { Link } from 'react-router';
 
 interface modalsOpenState {
   genreOpened: boolean,
@@ -47,6 +49,11 @@ export function FilterSearch() {
             <input type="checkbox" name="" id="" />
             </div>}
        </div>
+       <Link to="/favorites">
+       <>
+       <img src={favoriteIcon} alt="favorites star icon" className={styles.favIcon}/>
+       </>
+       </Link>
     </div>
     </>
   )

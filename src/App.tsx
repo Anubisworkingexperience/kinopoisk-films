@@ -3,6 +3,7 @@ import styles from './styles/app.module.css';
 import { FilterSearch } from './components/FilterSearch';
 import {Routes, Route} from "react-router-dom";
 import { FilmPage } from './pages/FilmPage';
+import { FavoritePage } from './pages/FavoritePage';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         </>
         } />
       <Route path='/film/:id' element={ <FilmPage /> }/>
+      <Route path='/favorites' element={<FavoritePage />}></Route>
     </Routes>
   )
 }

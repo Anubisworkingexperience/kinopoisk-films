@@ -33,3 +33,13 @@ body {
   position: relative;
   display: inline-block;
 }
+
+.favIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.favIcon:hover {
+  cursor: pointer;
+  /* rotate: -90deg; */
+}

@@ -4,6 +4,7 @@ import styles from '../styles/catalog.module.css';
 import logo from  "../assets/kinopoisk_logo.png";
 // import { makeAutoObservable } from "mobx";
 import { useNavigate } from "react-router";
+import favoriteIcon from '../assets/favorite-svgrepo-com.svg';
 
 interface Genre {
   name: string
@@ -21,7 +22,7 @@ export function FilmList() {
     allGenres.push(genres[i].name);
   }
 
-  console.log(allGenres)
+  // console.log(allGenres)
 
   const [films, setFilms] = useState([
     {
@@ -30,7 +31,7 @@ export function FilmList() {
         url: logo,
         previewUrl: "string"
       },
-        name: "Название фильма",
+        name: "Название фильма 1",
         year: 2000,
         rating: {
         kp: 6.2,
@@ -47,7 +48,7 @@ export function FilmList() {
         url: logo,
         previewUrl: "string"
       },
-        name: "Название фильма",
+        name: "Название фильма 2",
         year: 2000,
         rating: {
         kp: 6.2,
@@ -64,7 +65,7 @@ export function FilmList() {
         url: logo,
         previewUrl: "string"
       },
-        name: "Название фильма",
+        name: "Название фильма 3",
         year: 2000,
         rating: {
         kp: 6.2,
@@ -151,7 +152,21 @@ export function FilmList() {
       <div className={styles.film} key={index} onClick={() => navigate(`/film/${film.id}`)}>
       <img src={film.poster.url || film.poster.previewUrl || logo} alt={`Фильм: ${film.name || 'loading...'}`} className={styles.filmPoster}/>
       <div className={styles.filmInfo}>
-        <p className="film-name">{film.name || ""}</p>
+        <div className={styles.topPanel}>
+          <h2 className={styles.filmName}>{film.name || ""}</h2>
+          <img src={favoriteIcon} alt="add to favorites star icon" className={styles.favIcon} onClick={() => {
+            if (confirm('Вы уверены, что хотите добавить фильм в "избранное"?')) {
+              alert('Фильм добавлен в избранное');
+              
+              const filmData = {
+                id: film.id,
+                name: film.name
+              }
+              sessionStorage.setItem(`favFilm-${film.id}`, JSON.stringify(filmData));
+              // sessionStorage.setItem(`favName${film.name}`, film.name.toString());
+            }
+          }}/>
+        </div>
         <p className="film-year">Год: {film.year || ""}</p>
         <p>Рейтинги:</p>
         {Object.entries(film.rating).map(([rating, value]) => 

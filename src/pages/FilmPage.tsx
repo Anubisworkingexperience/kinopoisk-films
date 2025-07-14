@@ -4,6 +4,7 @@ import { useState, useEffect} from "react";
 import logo from  "../assets/kinopoisk_logo.png";
 import styles from '../styles/filmPage.module.css';
 
+
 interface Film {
   poster: {
     url: string,
