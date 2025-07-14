@@ -154,7 +154,10 @@ export function FilmList() {
       <div className={styles.filmInfo}>
         <div className={styles.topPanel}>
           <h2 className={styles.filmName}>{film.name || ""}</h2>
-          <img src={favoriteIcon} alt="add to favorites star icon" className={styles.favIcon} onClick={() => {
+          <img src={favoriteIcon} alt="add to favorites star icon" className={styles.favIcon} onClick={(event) => {
+            
+            event.stopPropagation();
+
             if (confirm('Вы уверены, что хотите добавить фильм в "избранное"?')) {
               alert('Фильм добавлен в избранное');
               
@@ -163,7 +166,6 @@ export function FilmList() {
                 name: film.name
               }
               sessionStorage.setItem(`favFilm-${film.id}`, JSON.stringify(filmData));
-              // sessionStorage.setItem(`favName${film.name}`, film.name.toString());
             }
           }}/>
         </div>
