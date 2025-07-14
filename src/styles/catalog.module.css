@@ -20,22 +20,24 @@ h1 {
   margin-right: 7%;
 }
 
-.film {
-  display: flex;
-  padding-right: 20px;
-  box-shadow: 5px 5px 5px #2688eb;
-  width: max-content;
-  /* border-top: 3px solid black; */
-}
-
 .film:hover {
   cursor: pointer;
-  transform: scale(1.05);
+  transform: scale(1.025);
 }
 
 .films {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
   gap: 25px;
 }
 
+.filmInfo {
+  width: max-content;
+}
+
+.film {
+  display: flex;
+  padding-right: 20px;
+  box-shadow: 5px 5px 5px #2688eb;
+  background-color: white;
+}

@@ -1,0 +1,28 @@
+
+
+.filmDetailed {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  background-color: #2688eb;
+  color: white;
+  margin-top: 15px;
+  border-radius: 20px;
+  height: 100vh;
+  font-size: 2rem;
+}
+
+.filmInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.filmPoster {
+  width: 25%;
+  height: 50%;
+  margin-right: 7%;
+}
+
+.ratingList {
+  list-style-type: square;
+}

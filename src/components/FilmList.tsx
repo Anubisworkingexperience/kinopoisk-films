@@ -2,12 +2,30 @@ import { useState } from "react";
 import { useEffect} from "react";
 import styles from '../styles/catalog.module.css';
 import logo from  "../assets/kinopoisk_logo.png";
-// import { useSearchParams } from "react-router";
+// import { makeAutoObservable } from "mobx";
+import { useNavigate } from "react-router";
+
+interface Genre {
+  name: string
+}
 
 export function FilmList() {
 
+  const [genres, setGenres] = useState<Genre[]>([]);
+
+  const navigate = useNavigate();
+
+  const allGenres: string[] = [];
+
+  for (let i = 0; i < genres.length; i++) {
+    allGenres.push(genres[i].name);
+  }
+
+  console.log(allGenres)
+
   const [films, setFilms] = useState([
     {
+      id: 22,
       poster: {
         url: logo,
         previewUrl: "string"
@@ -22,7 +40,42 @@ export function FilmList() {
         russianFilmCritics: 5.1,
         await: 6.1
       },
-    }
+    },
+    {
+      id: 222,
+      poster: {
+        url: logo,
+        previewUrl: "string"
+      },
+        name: "Название фильма",
+        year: 2000,
+        rating: {
+        kp: 6.2,
+        imdb: 8.4,
+        tmdb: 3.2,
+        filmCritics: 10,
+        russianFilmCritics: 5.1,
+        await: 6.1
+      },
+    },
+    {
+      id: 226,
+      poster: {
+        url: logo,
+        previewUrl: "string"
+      },
+        name: "Название фильма",
+        year: 2000,
+        rating: {
+        kp: 6.2,
+        imdb: 8.4,
+        tmdb: 3.2,
+        filmCritics: 10,
+        russianFilmCritics: 5.1,
+        await: 6.1
+      },
+    },
+    
   ]);
 
   const baseLink = `https://api.kinopoisk.dev/v1.4/movie/random`;
@@ -34,6 +87,7 @@ export function FilmList() {
     .then((response => response.json()))
     .then((response => {
       const newFilm = {
+        id: response.id,
         poster: {
           url: response.poster.url,
           previewUrl: response.poster.previewUrl
@@ -47,30 +101,40 @@ export function FilmList() {
           filmCritics: response.rating.filmCritics,
           russianFilmCritics: response.rating.russianFilmCritics,
           await: response.rating.await
-        }
+        },
+          genres: [
+            {
+              name: "string"
+            }
+          ],
       }
       setFilms((prevFilms) => [...prevFilms, newFilm]);
+      setGenres((prevGenres) => [...prevGenres, ...newFilm.genres])
+      
     }
     ))
     .catch((error) => console.error(error));
     }
 
+    let fetchingFilms : boolean = false;
+
     const addFilmsOnScroll = () => {
-      while (true) {
-        const bottomWindowBorder = document.documentElement.getBoundingClientRect().bottom;
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.offsetHeight;
 
-        if (bottomWindowBorder > document.documentElement.clientHeight + 100) {
-          break;
-        }
+    if (scrollTop + windowHeight >= documentHeight - 100 && !fetchingFilms) {
+      fetchingFilms = true;
 
-        //TODO: run 50 times
-        fetchData();
-      }
+      Promise.all([fetchData()]).then(() => {
+        fetchingFilms = false;
+      });
+    }
     }
 
     window.addEventListener('scroll', addFilmsOnScroll);
  
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
       fetchData();
     }
 
@@ -84,9 +148,9 @@ export function FilmList() {
     <>
     <div className={styles.films}>
     {films.map((film, index) => (
-      <div className={styles.film} key={index} >
+      <div className={styles.film} key={index} onClick={() => navigate(`/film/${film.id}`)}>
       <img src={film.poster.url || film.poster.previewUrl || logo} alt={`Фильм: ${film.name || 'loading...'}`} className={styles.filmPoster}/>
-      <div className="film-info">
+      <div className={styles.filmInfo}>
         <p className="film-name">{film.name || ""}</p>
         <p className="film-year">Год: {film.year || ""}</p>
         <p>Рейтинги:</p>
