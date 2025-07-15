@@ -14,7 +14,13 @@ cd some-test
 npm install
 ```
 
-3. Используйте свой API ключ в файле .env
+3. Получите свой API ключ
+
+Получите API ключ по инструкции в документации API
+
+[Ссылка на документацию](https://api.kinopoisk.dev/documentation)
+
+4. Используйте свой API ключ в файле .env
 
 ```bash
 cp .env.default .env
@@ -22,10 +28,10 @@ cp .env.default .env
 Откройте файл .env и используйте свой API ключ
 
 ```dotenv
-VITE_API_KEY=api_key
+VITE_API_KEY=<ваш api ключ>
 ```
 
-4. Запустите приложение
+5. Запустите приложение
 
 ```bash
 npm run dev
