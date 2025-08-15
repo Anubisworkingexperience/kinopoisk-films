@@ -5,8 +5,8 @@
 1. Создайте локальную копию репозитория
 
 ```bash
-git clone https://github.com/Anubisworkingexperience/some-test.git
-cd some-test
+git clone https://github.com/Anubisworkingexperience/kinopoisk-films.git
+cd kinopoisk-films
 ```
 
 2. Установите зависимости
